@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIHandler : MonoBehaviour {
-
 
 	public GameObject LevelDialog;
 	public Text LevelStatus;
@@ -22,5 +22,9 @@ public class UIHandler : MonoBehaviour {
 		LevelDialog.SetActive(true);
 		LevelStatus.text = status;
 		scoreText.text = scores;
+	}
+
+	public void ReplayLevel(){
+		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 	}
 }
