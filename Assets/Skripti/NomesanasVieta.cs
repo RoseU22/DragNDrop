@@ -17,6 +17,8 @@ public class NomesanasVieta : MonoBehaviour, IDropHandler {
     
 	//Nomainít pret to laiku kurś tiks skaitíts
 	public int score = 0;
+	public int minutes = 0;
+	public int stundas = 0;
 
 	void Start () {
 		StartCoroutine (time());
@@ -32,6 +34,15 @@ public class NomesanasVieta : MonoBehaviour, IDropHandler {
 
 	void timeCount () {	
 		score += 1;
+		if(score == 60){
+			minutes += 1;
+			score = 0;
+		}
+
+		if (minutes == 60) {
+			stundas += 1;
+			minutes = 0;
+		}
 	}
 
     public void OnDrop(PointerEventData eventData)
@@ -185,8 +196,16 @@ public class NomesanasVieta : MonoBehaviour, IDropHandler {
         }
 
 
-		if (ObjektuSkaits == 12) {
-			string message = "Laiks: " + score;
+		if (ObjektuSkaits == 12 && minutes < 1) {
+			string message = "Laiks: "+ score + " sekundes";
+			UIHandler.instance.ShowLevelDialog ("UZVARA", message);
+
+		} else if (ObjektuSkaits == 12 && minutes >= 1 && minutes <= 60 && stundas == 0) {
+			string message = "Laiks: "+ minutes + ": " + score + " min";
+			UIHandler.instance.ShowLevelDialog ("UZVARA", message);
+
+		} else if (ObjektuSkaits == 12 && stundas >= 1) {
+			string message = "Laiks: " + stundas + ": " + minutes + ": " + score + " h";
 			UIHandler.instance.ShowLevelDialog ("UZVARA", message);
 		}
     }
