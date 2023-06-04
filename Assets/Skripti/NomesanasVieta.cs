@@ -32,7 +32,7 @@ public class NomesanasVieta : MonoBehaviour, IDropHandler {
 
                 Debug.Log("Objekta rotācijas starpība: "+rotacijasStarpiba+"\nPlatuma starpība: "+xIzmStarpiba+"\nAugstuma starpība: "+yIzmStarpiba);
 
-                if (rotacijasStarpiba <= 6 || (rotacijasStarpiba >= 354 && rotacijasStarpiba <= 360) && (xIzmStarpiba <= 0.1 && yIzmStarpiba <= 0.1))
+				if (rotacijasStarpiba <= 6 && (xIzmStarpiba <= 0.1 && yIzmStarpiba <= 0.1) || (rotacijasStarpiba >= 354 && rotacijasStarpiba <= 360) && (xIzmStarpiba <= 0.1 && yIzmStarpiba <= 0.1))
                 {
                     Debug.Log("Nomests pareizajā vietā!");
                     objektuSkripts.vaiIstajaVieta = true;
