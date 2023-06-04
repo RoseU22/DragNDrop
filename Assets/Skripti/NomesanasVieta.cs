@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Runtime.Serialization;
 
 public class NomesanasVieta : MonoBehaviour, IDropHandler {
 
@@ -9,8 +11,28 @@ public class NomesanasVieta : MonoBehaviour, IDropHandler {
     private float xIzmStarpiba, yIzmStarpiba;
     private Vector2 vietasIzm, velkObjIzm;
 
+	private int ObjektuSkaits;
+
 	public Objekti objektuSkripts;
     
+	//Nomainít pret to laiku kurś tiks skaitíts
+	public int score = 0;
+
+	void Start () {
+		StartCoroutine (time());
+	}
+
+	IEnumerator time(){
+		while (true) 
+		{
+			timeCount();
+			yield return new WaitForSeconds (1);
+		}
+	}
+
+	void timeCount () {	
+		score += 1;
+	}
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -36,6 +58,8 @@ public class NomesanasVieta : MonoBehaviour, IDropHandler {
                 {
                     Debug.Log("Nomests pareizajā vietā!");
                     objektuSkripts.vaiIstajaVieta = true;
+					ObjektuSkaits = ObjektuSkaits+12;
+					Debug.Log ("Maśínas noliktas vietá: "+ObjektuSkaits);
 
                     eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
                     eventData.pointerDrag.GetComponent<RectTransform>().localRotation = GetComponent<RectTransform>().localRotation;
@@ -159,5 +183,11 @@ public class NomesanasVieta : MonoBehaviour, IDropHandler {
                 }
             }
         }
+
+
+		if (ObjektuSkaits == 12) {
+			string message = "Laiks: " + score;
+			UIHandler.instance.ShowLevelDialog ("UZVARA", message);
+		}
     }
 }
