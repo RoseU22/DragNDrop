@@ -7,6 +7,7 @@ public class StarsHandler : MonoBehaviour {
 	public GameObject[] stars;
 	public int score = 0;
 
+	//Sák skaitít laiku
 	void Start () {
 		StartCoroutine (time());
 	}
@@ -23,18 +24,22 @@ public class StarsHandler : MonoBehaviour {
 		score += 1;
 	}
 
+	//Nosaka cik zvaigznes lietotájs dabús balstoties uz vińa laiku
 	public void starsAchieved(){
 
 		if (score >= 200) {
 			
 			//one star
 			stars [0].SetActive (true);
+			stars [4].SetActive (true);
+			stars [5].SetActive (true);
 
 		} else if (score >= 150 && score <= 200) {
 			
 			//two stars
 			stars [0].SetActive (true);
 			stars [1].SetActive (true);
+			stars [5].SetActive (true);
 
 		} else if (score < 150) {
 			
